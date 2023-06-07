@@ -4,6 +4,10 @@ namespace SolidSample.Services;
 
 public class AudioBooksRepository : RepositoryBase<AudioBook>
 {
+    public AudioBooksRepository(AppDbContext dbContext) : base(dbContext)
+    {
+    }
+
     public override void Save(AudioBook item)
     {
         //You can do anything before

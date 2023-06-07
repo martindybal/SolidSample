@@ -5,9 +5,8 @@ namespace SolidSample.Model;
 public class AppDbContext : DbContext
 {
     public DbSet<AudioBook> AudioBooks { get; set; } = null!;
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
-        optionsBuilder.UseInMemoryDatabase("SolidSample");
     }
 }

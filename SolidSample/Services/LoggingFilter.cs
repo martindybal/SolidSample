@@ -4,10 +4,9 @@ namespace SolidSample.Services;
 
 public class LoggingFilter : ExceptionFilterAttribute
 {
-    private readonly ILogger logger = new FileLogger();
-
     public override void OnException(ExceptionContext context)
     {
+        var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger>();
         logger.LogException(context.Exception);
         base.OnException(context);
     }
