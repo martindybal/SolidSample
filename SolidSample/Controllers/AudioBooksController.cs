@@ -8,7 +8,12 @@ namespace SolidSample.Controllers;
 [Route("api/[controller]")]
 public class AudioBooksController : ControllerBase
 {
-    private readonly IRepository<AudioBook> audioBooksRepository = new AudioBooksRepository();
+    private readonly IRepository<AudioBook> audioBooksRepository;
+
+    public AudioBooksController(IRepository<AudioBook> audioBooksRepository)
+    {
+        this.audioBooksRepository = audioBooksRepository;
+    }
 
     [HttpGet]
     [LoggingFilter]
