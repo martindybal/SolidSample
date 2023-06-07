@@ -17,9 +17,9 @@ public class AudioBooksController : ControllerBase
     [HttpPost]
     public void SaveAudioBook(AudioBook audioBook)
     {
-        using var dbContext = new AppDbContext();
         try
         {
+            using var dbContext = new AppDbContext();
             dbContext.AudioBooks.Add(audioBook);
             dbContext.SaveChanges();
         }
