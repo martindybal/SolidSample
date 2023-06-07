@@ -1,6 +1,6 @@
 namespace SolidSample.Services;
 
-public class FileLogger
+public class FileLogger : ILogger
 {
     public void LogException(Exception ex)
     {

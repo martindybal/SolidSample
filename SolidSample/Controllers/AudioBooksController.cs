@@ -8,19 +8,19 @@ namespace SolidSample.Controllers;
 [Route("api/[controller]")]
 public class AudioBooksController : ControllerBase
 {
-    private readonly AudioBooksRepository audioBooksRepository = new ();
+    private readonly IRepository<AudioBook> audioBooksRepository = new AudioBooksRepository();
 
     [HttpGet]
     [LoggingFilter]
     public AudioBook[] GetAudioBooks()
     {
-        return audioBooksRepository.GetAll();
+        return audioBooksRepository.GetByQuery(new AllAudioBooksQuery());
     }
 
     [HttpPost]
     [LoggingFilter]
     public void SaveAudioBook(AudioBook audioBook)
     {
-            audioBooksRepository.Save(audioBook);
+        audioBooksRepository.Save(audioBook);
     }
 }
