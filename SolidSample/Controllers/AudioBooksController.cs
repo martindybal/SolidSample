@@ -25,7 +25,7 @@ public class AudioBooksController : ControllerBase
         }
         catch (Exception ex)
         {
-            System.IO.File.AppendAllText($"logs\\{DateTime.Now:yyyy-MM-dd}.log", DateTime.Now + ": " + ex + Environment.NewLine);
+            System.IO.File.AppendAllText($"logs\\{DateTime.Now:yyyy-MM-dd}.log", $"{DateTime.Now}: {ex}{Environment.NewLine}");
         }
     }
 }
