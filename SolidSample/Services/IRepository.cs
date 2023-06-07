@@ -1,7 +1,6 @@
 namespace SolidSample.Services;
 
-public interface IRepository<T>
+public interface IRepository<T> : IQueryableRepository<T>, IUpdatableRepository<T>
 {
-    T[] GetByQuery(IQuery<T> query);
-    void Save(T customer);
+
 }
