@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SolidSample.Model;
+using SolidSample.Services;
 
 namespace SolidSample.Controllers;
 
@@ -7,25 +8,19 @@ namespace SolidSample.Controllers;
 [Route("api/[controller]")]
 public class AudioBooksController : ControllerBase
 {
+    private readonly AudioBooksRepository audioBooksRepository = new ();
+
     [HttpGet]
+    [LoggingFilter]
     public AudioBook[] GetAudioBooks()
     {
-        using var dbContext = new AppDbContext();
-        return dbContext.AudioBooks.ToArray();
+        return audioBooksRepository.GetAll();
     }
 
     [HttpPost]
+    [LoggingFilter]
     public void SaveAudioBook(AudioBook audioBook)
     {
-        try
-        {
-            using var dbContext = new AppDbContext();
-            dbContext.AudioBooks.Add(audioBook);
-            dbContext.SaveChanges();
-        }
-        catch (Exception ex)
-        {
-            System.IO.File.AppendAllText($"logs\\{DateTime.Now:yyyy-MM-dd}.log", $"{DateTime.Now}: {ex}{Environment.NewLine}");
-        }
+            audioBooksRepository.Save(audioBook);
     }
 }
